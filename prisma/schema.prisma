@@ -1,0 +1,66 @@
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  role      String   // e.g. 'admin', 'editor'
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Message {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String
+  body      String
+  createdAt DateTime @default(now())
+}
+model BlogPost {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Certificate {
+  id        Int      @id @default(autoincrement())
+  title     String
+  issuer    String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model TeamMember {
+  id        Int      @id @default(autoincrement())
+  name      String
+  role      String
+  bio       String?
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Product {
+  id        Int      @id @default(autoincrement())
+  name      String
+  category  String
+  specs     String   // JSON stringified array
+  images    String   // JSON stringified array
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
